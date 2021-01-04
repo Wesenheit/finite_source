@@ -11,3 +11,32 @@ A(u,rho) = sqrt(1+4/rho^2) * fi(u/rho,rho) for u < rho.
 The pre-calculated values of f0 and fi (as a function of z = rho/u or z = u/rho and rho) are read from binary files func0.dat and func1.dat. The magnifications are calculated using a linear interpolation between the grid points in z and logrho.
 
 Files func0.dat and func1.dat should be pre-calculated using precalculate_table.
+
+## How to install?
+
+```
+git clone https://github.com/przemekmroz/finite_source
+./compile.do
+```
+
+## Usage
+
+### Python
+
+```
+import Finite
+
+# reading pre-computed tables
+
+f0 = np.fromfile('func0.dat')
+f1 = np.fromfile('func1.dat')
+
+
+u = 3.0
+rho = 5.0
+Gamma = 0.5
+Lambda = 0.0
+n_rings = 128
+
+A = Finite.ampl_ld(u,rho,Gamma,Lambda,f0,f1,n_rings)
+```
