@@ -34,6 +34,9 @@ static char func_docstring1[] =
     
 static char func_docstring2[] = 
     "Extended source magnification for a limb-darkened source.";
+    
+static char func_docstring3[] = 
+    "Extended source magnification for a limb-darkened source.";
 
 static PyObject *
 ampl_wrapper (PyObject *self, PyObject *args)
@@ -117,7 +120,62 @@ ampl_ld_wrapper (PyObject *self, PyObject *args)
     return Py_BuildValue("d",A);
 }
 
+static PyObject *
+ampl_ld_array_wrapper (PyObject *self, PyObject *args)
+{
+    
+    /* This is Python wrapper for ampl_ld(u,rho,Gamma,Lambda) */
+    
+    PyObject *func0_obj,*func1_obj,*u_obj,*A_obj; 
+    /* pointers to PyObject objects containing pre-calculated magnifications */
+    double *func0,*func1; /* pointers to arrays containing the data */
+    double *u,rho,Gamma,Lambda,*A;
+    int i,n_rings;
+    
+    /* Parsing arguments */
+    if (!PyArg_ParseTuple(args,"OdddOOi",&u_obj,&rho,&Gamma,&Lambda,
+        &func0_obj,&func1_obj,&n_rings)) return NULL;
+
+    /* Interpret the input objects as numpy arrays */
+    PyObject *func0_ = PyArray_FROM_OTF(func0_obj,NPY_DOUBLE,NPY_IN_ARRAY);
+    PyObject *func1_ = PyArray_FROM_OTF(func1_obj,NPY_DOUBLE,NPY_IN_ARRAY);
+    PyObject *u_ = PyArray_FROM_OTF(u_obj,NPY_DOUBLE,NPY_IN_ARRAY);
+    
+    /* If that didn't work, throw an exception */
+    if ( func0_ == NULL || func1_ == NULL || u_ == NULL) {
+        Py_XDECREF(func0_);
+        Py_XDECREF(func1_);
+        Py_XDECREF(u_);
+        return NULL;
+    }
+
+    /* Get pointers to the data as C-types */
+    func0 = (double *) PyArray_DATA(func0_);
+    func1 = (double *) PyArray_DATA(func1_);
+    u = (double *) PyArray_DATA(u_);
+    npy_intp *dims = PyArray_DIMS(u_); //number of elements in u array
+            
+    /* Call the external C function to calculate the magnification */
+
+    A = (double *) PyMem_Malloc(dims[0]*sizeof(double));
+    for (i=0; i<dims[0]; i++) {
+        A[i] = ampl_ld(u[i],rho,Gamma,Lambda,func0,func1,n_rings);
+    }
+    A_obj = PyArray_SimpleNew(1,dims,NPY_DOUBLE);
+    memcpy(PyArray_DATA(A_obj),A,dims[0]*sizeof(double));
+    
+    /* Cleaning-up */
+    Py_DECREF(func0_);
+    Py_DECREF(func1_);
+    
+    PyMem_Free(A);
+    
+    /* Return the calculated value */
+    return Py_BuildValue("N",A_obj);
+}
+
 static PyMethodDef FiniteMethods[] = {
+    {"ampl_ld_array", (PyCFunction) ampl_ld_array_wrapper, METH_VARARGS, func_docstring3},
     {"ampl_ld", (PyCFunction) ampl_ld_wrapper, METH_VARARGS, func_docstring2},
     {"ampl", (PyCFunction) ampl_wrapper, METH_VARARGS, func_docstring1},
     {NULL, NULL, 0, NULL}
