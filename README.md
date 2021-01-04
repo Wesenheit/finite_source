@@ -39,6 +39,9 @@ Lambda = 0.0
 n_rings = 128
 
 A = Finite.ampl_ld(u,rho,Gamma,Lambda,f0,f1,n_rings)
+
+u = np.linspace(0.0,1.0,100)
+A = Finite.ampl_ld_array(u,rho,Gamma,Lambda,f0,f1,n_rings)
 ```
 
 ### C
