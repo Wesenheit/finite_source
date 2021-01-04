@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "elliptic_integral.h"
+#include "finite.h"
 
 /* This program can be used to precalculate the binary files containing
  * quantities necessary for calculation of microlensing magnification
@@ -22,14 +23,7 @@
  * 
  * P. Mroz @ IPAC, 30 Apr 2019
  */
-
-#define Z_MIN 0.0
-#define Z_MAX 1.0
-#define LOGRHO_MIN -3.0
-#define LOGRHO_MAX 2.0
-#define Z_STEPS 128
-#define LOGRHO_STEPS 256
-
+ 
 void finite_source (double *f0, double *fi, double z, double rho) {
     
     double n,k,t,E,F,Pi;

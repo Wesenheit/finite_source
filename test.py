@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-import Finite3
+import Finite
 
 # reading pre-computed tables
 
@@ -20,7 +20,7 @@ n_rings = 128
 u = np.sqrt(u0*u0+times*times)
 
 start = time.time()
-A = np.array([Finite3.ampl_ld(x,rho,Gamma,Lambda,f0,f1,n_rings) for x in u])
+A = np.array([Finite.ampl_ld(x,rho,Gamma,Lambda,f0,f1,n_rings) for x in u])
 end = time.time()
 
 print ('Execution time: %.2f s'%(end-start))

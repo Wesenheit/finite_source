@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "finite.h"
 
 /* This program can be used for calculation of microlensing 
  * magnifications in the extended source single lens model. The 
@@ -41,13 +42,6 @@
  * 
  * P. Mroz @ IPAC, 30 Apr 2019
  */
-
-#define Z_MIN 0.0
-#define Z_MAX 1.0
-#define LOGRHO_MIN -3.0
-#define LOGRHO_MAX 2.0
-#define Z_STEPS 128
-#define LOGRHO_STEPS 256
 
 int read_binary_table (double *tab, char *fname, int m, int n) {
     
