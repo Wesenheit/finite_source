@@ -36,7 +36,7 @@ u = 3.0
 rho = 5.0
 Gamma = 0.5
 Lambda = 0.0
-n_rings = 128
+n_rings = 64
 
 A = Finite.ampl_ld(u,rho,Gamma,Lambda,f0,f1,n_rings)
 
@@ -62,8 +62,8 @@ int main (int argc, char *argv[]) {
     rho = 1.0;
     Gamma = 0.5;
     Lambda = 0.5;
-
-    n_rings=128;
+    n_rings = 64;
+    
     i = read_binary_table(func0,"../func0.dat",Z_STEPS+1,LOGRHO_STEPS+1);
     j = read_binary_table(func1,"../func1.dat",Z_STEPS+1,LOGRHO_STEPS+1);
     A = ampl(u,rho,func0,func1);
