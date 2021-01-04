@@ -129,6 +129,7 @@ double ampl_ld (double u, double rho, double Gamma, double Lambda,
      * method that is outlined in Section 2 of Bozza et al. 2018 */
     
     if (u >= 10.0*rho) return ampl(u,rho,func0,func1);
+    if (Gamma == 0.0 && Lambda == 0.0) return ampl(u,rho,func0,func1);
     
     int i;
     double rad[nsteps+1];
