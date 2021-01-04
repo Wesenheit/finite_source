@@ -40,3 +40,34 @@ n_rings = 128
 
 A = Finite.ampl_ld(u,rho,Gamma,Lambda,f0,f1,n_rings)
 ```
+
+### C
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include "finite.h"
+
+int main (int argc, char *argv[]) {
+    double func0[(Z_STEPS+1)*(LOGRHO_STEPS+1)];
+    double func1[(Z_STEPS+1)*(LOGRHO_STEPS+1)];
+    int i,j,n_rings;
+    double A,u,rho,Gamma,Lambda;
+
+    u = 0.1;
+    rho = 1.0;
+    Gamma = 0.5;
+    Lambda = 0.5;
+
+    n_rings=128;
+    i = read_binary_table(func0,"../func0.dat",Z_STEPS+1,LOGRHO_STEPS+1);
+    j = read_binary_table(func1,"../func1.dat",Z_STEPS+1,LOGRHO_STEPS+1);
+    A = ampl(u,rho,func0,func1);
+    printf("%f\n",A);
+    A = ampl_ld(u,rho,Gamma,Lambda,func0,func1,n_rings);
+    printf("%f\n",A);
+    return 0;
+}
+
+```
