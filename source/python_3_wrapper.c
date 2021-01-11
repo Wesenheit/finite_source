@@ -167,6 +167,7 @@ ampl_ld_array_wrapper (PyObject *self, PyObject *args)
     /* Cleaning-up */
     Py_DECREF(func0_);
     Py_DECREF(func1_);
+    Py_DECREF(u_);
     
     PyMem_Free(A);
     
