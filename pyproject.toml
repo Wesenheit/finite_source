@@ -3,7 +3,7 @@ name = "Finite"
 version = "0.1.0"
 description = "Calculate microlensing magnification with finite-source effects."
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 
 
 [build-system]
