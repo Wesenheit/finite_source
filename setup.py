@@ -52,6 +52,18 @@ class BuildWithPreprocessing(build_ext):
             subprocess.run([str(root / "precalculate_table")], check=True, cwd=root)
             print("✓ Preprocessing completed")
 
+            target_dir = Path(self.build_lib) / "Finite"
+            print(root, target_dir)
+            subprocess.run(
+                ["mv", str(root / "func0.dat"), str(target_dir)],
+                check=True,
+                cwd=root,
+            )
+            subprocess.run(
+                ["mv", str(root / "func1.dat"), str(target_dir)],
+                check=True,
+                cwd=root,
+            )
         except subprocess.CalledProcessError as e:
             print(f"Error during preprocessing: {e}")
             raise

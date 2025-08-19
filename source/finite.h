@@ -8,7 +8,7 @@
 #define Z_STEPS 128
 #define LOGRHO_STEPS 256
 
-double ampl (double, double, double*, double*);
-double ampl_ld (double, double, double, double, double*, double*, int);
+double ampl(double, double, double *, double *);
+double ampl_ld(double, double, double, double, double *, double *, int);
 
 #endif

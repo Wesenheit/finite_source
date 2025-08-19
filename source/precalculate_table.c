@@ -70,8 +70,8 @@ int main(int argc, char *argv[]) {
   d_z = (z_max - z_min) / z_steps;
   d_logrho = (logrho_max - logrho_min) / logrho_steps;
 
-  file0 = fopen("Finite/func0.dat", "wb");
-  file1 = fopen("Finite/func1.dat", "wb");
+  file0 = fopen("func0.dat", "wb");
+  file1 = fopen("func1.dat", "wb");
   if (file0 == NULL || file1 == NULL)
     return 1;
 
