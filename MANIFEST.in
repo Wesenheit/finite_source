@@ -1,3 +1,3 @@
-include source/*.c
-include source/*.h
+include src/src_C/*.c
+include src/src_C/*.h
 

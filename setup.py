@@ -7,13 +7,8 @@ from setuptools import Extension, setup
 
 class BuildWithPreprocessing(build_ext):
     def run(self):
-        # Run the preprocessing step first
         self.run_preprocessing()
-
-        # Make sure numpy include dirs are added **after numpy is installed**
         self.add_numpy_include()
-
-        # Continue with normal build_ext
         super().run()
 
     def add_numpy_include(self):
@@ -40,18 +35,18 @@ class BuildWithPreprocessing(build_ext):
             "-lm",
             "-o",
             str(root / "precalculate_table"),
-            str(root / "source/precalculate_table.c"),
-            str(root / "source/elliptic_integral.c"),
+            str(root / "src/src_C/precalculate_table.c"),
+            str(root / "src/src_C/elliptic_integral.c"),
         ]
 
         print("Running preprocessing step...")
 
         try:
             subprocess.run(compile_cmd, check=True, cwd=root)
-            print("✓ Compilation successful")
+            print("Compilation successful")
 
             subprocess.run([str(root / "precalculate_table")], check=True, cwd=root)
-            print("✓ Preprocessing completed")
+            print("Preprocessing completed")
 
             target_dir = Path(self.build_lib) / "Finite"
             print(root, target_dir)
@@ -73,7 +68,7 @@ class BuildWithPreprocessing(build_ext):
 ext_modules = [
     Extension(
         name="Finite_C",
-        sources=["source/python_3_wrapper.c", "source/finite.c"],
+        sources=["src/src_C/python_3_wrapper.c", "src/src_C/finite.c"],
         include_dirs=[],
     )
 ]

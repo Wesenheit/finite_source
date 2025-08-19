@@ -1,0 +1,5 @@
+*.egg-info
+*.so
+precalculate_table
+__pycache__
+build/

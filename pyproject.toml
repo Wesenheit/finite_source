@@ -4,14 +4,28 @@ version = "0.1.0"
 description = "Calculate microlensing magnification with finite-source effects."
 readme = "README.md"
 requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-benchmark",
+    "pytest-cov",
+]
 
 [build-system]
 requires = ["setuptools>=42", "wheel", "numpy"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-packages = ["Finite"]
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["Finite*"]
 
 [tool.setuptools.package-data]
 Finite = ["*.dat"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
