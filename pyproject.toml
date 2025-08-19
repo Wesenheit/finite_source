@@ -26,6 +26,10 @@ include = ["Finite*"]
 [tool.setuptools.package-data]
 Finite = ["*.dat"]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
 [tool.ruff]
 line-length = 88
 target-version = "py311"

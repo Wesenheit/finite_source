@@ -1,10 +1,7 @@
-import numpy as np
-import time
-
-import Finite
-
-
 def test_org():
+    import numpy as np
+    import Finite
+
     u0 = 3.0
     rho = 5.0
     Gamma = 0.5
