@@ -37,6 +37,7 @@ class BuildWithPreprocessing(build_ext):
         compile_cmd = [
             cc,
             *cflags,
+            "-lm",
             "-o",
             str(root / "precalculate_table"),
             str(root / "source/precalculate_table.c"),
