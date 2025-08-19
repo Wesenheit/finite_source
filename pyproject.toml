@@ -4,13 +4,19 @@ version = "0.1.0"
 description = "Calculate microlensing magnification with finite-source effects."
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [
-    "numpy>=1.26",
-]
+
+
+[build-system]
+requires = ["setuptools>=42", "wheel", "numpy"]
+build-backend = "setuptools.build_meta"
 
 [tool.your-package.build]
 cc = "gcc"
 cxx = "g++"
 cflags = ["-Ofast", "-Wall"]
-enable-openmp = true
 
+[tool.setuptools]
+packages = ["Finite"]
+
+[tool.setuptools.package-data]
+Finite = ["*.dat"]

@@ -59,7 +59,7 @@ class BuildWithPreprocessing(build_ext):
 
 ext_modules = [
     Extension(
-        name="Finite",
+        name="Finite_C",
         sources=["source/python_3_wrapper.c", "source/finite.c"],
         include_dirs=[],
     )

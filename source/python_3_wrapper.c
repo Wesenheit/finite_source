@@ -178,16 +178,16 @@ static PyObject *ampl_ld_array_wrapper(PyObject *self, PyObject *args) {
 }
 
 static PyMethodDef FiniteMethods[] = {
-    {"ampl_ld_array", (PyCFunction)ampl_ld_array_wrapper, METH_VARARGS,
+    {"ampl_ld_array_C", (PyCFunction)ampl_ld_array_wrapper, METH_VARARGS,
      func_docstring3},
-    {"ampl_ld", (PyCFunction)ampl_ld_wrapper, METH_VARARGS, func_docstring2},
-    {"ampl", (PyCFunction)ampl_wrapper, METH_VARARGS, func_docstring1},
+    {"ampl_ld_C", (PyCFunction)ampl_ld_wrapper, METH_VARARGS, func_docstring2},
+    {"ampl_C", (PyCFunction)ampl_wrapper, METH_VARARGS, func_docstring1},
     {NULL, NULL, 0, NULL}};
 
-static struct PyModuleDef Finite = {PyModuleDef_HEAD_INIT, "Finite", "usage",
-                                    -1, FiniteMethods};
+static struct PyModuleDef Finite_C = {PyModuleDef_HEAD_INIT, "Finite_C",
+                                      "usage", -1, FiniteMethods};
 
-PyMODINIT_FUNC PyInit_Finite(void) {
+PyMODINIT_FUNC PyInit_Finite_C(void) {
   import_array();
-  return PyModule_Create(&Finite);
+  return PyModule_Create(&Finite_C);
 }
